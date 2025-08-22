@@ -1,11 +1,12 @@
 import Button from "@/components/shared/Button";
 import Input from "@/components/shared/Input";
+import { UserContext } from "@/context/UserContent";
 import { api } from "@/convex/_generated/api";
 import { auth } from "@/services/FirebaseConfig";
 import { useMutation } from "convex/react";
 import { Link } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert, Image, Text, View } from "react-native";
 
 const SignUp = () => {
@@ -13,6 +14,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [user, setUser] = useContext(UserContext);
+  console.log("🚀 ~ SignUp ~ user:", user);
   const createNewUser = useMutation(api.User.CreateNewUser);
 
   //   handle login
@@ -31,8 +34,10 @@ const SignUp = () => {
             email: email,
             name: fullName,
           });
-          console.log("🚀 ~ onSignUp ~ result:", result);
-          //   setUser(result);
+          setUser(result);
+          if (user) {
+            Alert.alert("User Created Successfully!!");
+          }
         }
       })
       .catch((error) => {
