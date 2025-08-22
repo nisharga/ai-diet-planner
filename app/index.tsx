@@ -1,8 +1,10 @@
 import Button from "@/components/shared/Button";
 import { WHITE } from "@/components/shared/Colors";
-import { Alert, Dimensions, Image, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Dimensions, Image, Text, View } from "react-native";
 
 export default function Index() {
+  const router = useRouter();
   return (
     <View style={{ flex: 1 }}>
       {/* Splash Background Image  */}
@@ -65,7 +67,10 @@ export default function Index() {
           padding: 20,
         }}
       >
-        <Button title="Get Started" onPress={() => Alert.alert("Hi")} />
+        <Button
+          title="Get Started"
+          onPress={() => router.push("./auth/SignIn")}
+        />
       </View>
     </View>
   );
