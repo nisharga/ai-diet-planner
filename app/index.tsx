@@ -14,6 +14,7 @@ export default function Index() {
       />
 
       {/* Overlay and content */}
+      {/* Overlay and content */}
       <View
         style={{
           position: "absolute",
