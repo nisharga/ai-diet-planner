@@ -91,6 +91,7 @@ const SignIn = () => {
       }
     }
   };
+
   /* const signOut = async () => {
     try {
       await GoogleSignin.signOut();
@@ -98,6 +99,7 @@ const SignIn = () => {
       console.error(error);
     }
   }; */
+
   //   handle login
   const onSignIn = () => {
     if (!email || !password) {
@@ -112,6 +114,7 @@ const SignIn = () => {
           email: email,
         });
         setUser(userData);
+        router.replace("/(tabs)/Home");
         if (user) {
           Alert.alert("User Login Successfully!!");
         }
