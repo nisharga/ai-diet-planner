@@ -1,4 +1,5 @@
 import HomeHeader from "@/components/ui/HomeHeader";
+import RecipeGenCard from "@/components/ui/RecipeGenCard";
 import TodayProgress from "@/components/ui/TodayProgress";
 import { UserContext } from "@/context/UserContent";
 import { useRouter } from "expo-router";
@@ -23,6 +24,7 @@ const Home = () => {
       >
         <HomeHeader />
         <TodayProgress />
+        <RecipeGenCard />
       </View>
     </SafeAreaView>
   );
