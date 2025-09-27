@@ -1,7 +1,10 @@
+import HomeHeader from "@/components/ui/HomeHeader";
+import TodayProgress from "@/components/ui/TodayProgress";
 import { UserContext } from "@/context/UserContent";
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
   const user = useContext(UserContext);
@@ -12,9 +15,16 @@ const Home = () => {
     }
   }, [router, user]);
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <SafeAreaView>
+      <View
+        style={{
+          padding: 20,
+        }}
+      >
+        <HomeHeader />
+        <TodayProgress />
+      </View>
+    </SafeAreaView>
   );
 };
 
