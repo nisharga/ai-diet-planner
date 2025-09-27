@@ -3,6 +3,7 @@ import { GRAY, PRIMARY, RED, WHITE } from "@/components/shared/Colors";
 import Input from "@/components/shared/Input";
 import { UserContext } from "@/context/UserContent";
 import { api } from "@/convex/_generated/api";
+import { calculateCaloriesAndProteins } from "@/services/ai";
 import { Ionicons } from "@expo/vector-icons";
 import { useMutation } from "convex/react";
 import { useRouter } from "expo-router";
@@ -37,17 +38,19 @@ const Preference = () => {
 
     const data = {
       uid: user?._id,
-      weight: weight,
-      height: height,
-      gender: gender,
-      goal: goal,
+      weight: weight, // 48
+      height: height, // 5.5
+      gender: gender, // female
+      goal: goal, // gain weight
     };
+
+    const { proteins, calories } = await calculateCaloriesAndProteins(data);
 
     const result = await UpdateUserPreference({
       ...data,
       age: "",
-      calories: 0,
-      proteins: 0,
+      calories: calories,
+      proteins: proteins,
     });
 
     console.log("result", result);
