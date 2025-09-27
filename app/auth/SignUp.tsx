@@ -4,7 +4,7 @@ import { UserContext } from "@/context/UserContent";
 import { api } from "@/convex/_generated/api";
 import { auth } from "@/services/FirebaseConfig";
 import { useMutation } from "convex/react";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Alert, Image, Text, View } from "react-native";
@@ -17,6 +17,8 @@ const SignUp = () => {
   const [user, setUser] = useContext(UserContext);
   console.log("🚀 ~ SignUp ~ user:", user);
   const createNewUser = useMutation(api.User.CreateNewUser);
+
+  const router = useRouter();
 
   //   handle login
   const onSignUp = () => {
@@ -37,6 +39,7 @@ const SignUp = () => {
           setUser(result);
           if (user) {
             Alert.alert("User Created Successfully!!");
+            router.push("/auth/SignIn");
           }
         }
       })

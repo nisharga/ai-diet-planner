@@ -11,17 +11,11 @@ export default defineSchema({
     height: v.optional(v.string()),
     weight: v.optional(v.string()),
     age: v.optional(v.string()),
-    gender: v.optional(v.string())
-  }),
-
-
-    /* height: v.optional(v.string()),
-    weight: v.optional(v.string()),
-    age: v.optional(v.string()),
     gender: v.optional(v.string()),
     goal: v.optional(v.string()),
     calories: v.optional(v.number()),
-    proteins: v.optional(v.number()), */
+    proteins: v.optional(v.number())
+  }),
 //   recipes: defineTable({
 //     jsonData: v.any(),
 //     imageUrl : v.optional(v.string()),
