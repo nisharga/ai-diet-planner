@@ -43,8 +43,8 @@ export const GetUser = query({
 });
 
 export const UpdateUserPreference = mutation({
-  args: {
-    uid: v.id("users"),
+  args: { 
+    uid: v.id('users'),
     height: v.string(),
     weight: v.string(),
     age: v.string(),

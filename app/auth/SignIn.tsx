@@ -13,7 +13,7 @@ import {
 import { useConvex } from "convex/react";
 import { Link, useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert, Image, Text, View } from "react-native";
 
 GoogleSignin.configure({
@@ -126,13 +126,6 @@ const SignIn = () => {
         Alert.alert("Invalid Email or Password", errorMessage);
       });
   };
-
-  const AuthUser = useContext(UserContext);
-  useEffect(() => {
-    if (!AuthUser[0]?.weight) {
-      router.replace("/preference");
-    }
-  }, [router, AuthUser]);
 
   return (
     <View
