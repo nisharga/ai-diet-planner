@@ -1,3 +1,7 @@
 export const WHITE = '#fff'
 export const PRIMARY = '#8837ff'
 export const YELLOW = '#00ff00'
+export const GRAY = 'gray'
+export const BLUE = 'blue'
+export const RED = 'red'
+export const PINK = 'pink'

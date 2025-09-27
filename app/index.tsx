@@ -1,10 +1,18 @@
 import Button from "@/components/shared/Button";
 import { WHITE } from "@/components/shared/Colors";
+import { UserContext } from "@/context/UserContent";
 import { useRouter } from "expo-router";
+import { useContext, useEffect } from "react";
 import { Dimensions, Image, Text, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
+  const user = useContext(UserContext);
+  useEffect(() => {
+    if (user[0]) {
+      router.replace("/(tabs)/Home");
+    }
+  }, [router, user]);
   return (
     <View style={{ flex: 1 }}>
       {/* Splash Background Image  */}
