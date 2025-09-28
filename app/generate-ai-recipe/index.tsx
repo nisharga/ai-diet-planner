@@ -1,4 +1,5 @@
 import Button from "@/components/shared/Button";
+import RecipeOptionList from "@/components/ui/RecipeOptionList";
 import { generateRecipeVariants } from "@/services/ai";
 import React, { useState } from "react";
 import {
@@ -15,6 +16,7 @@ export default function GenerateAiRecipe() {
   console.log("🚀 ~ GenerateAiRecipe ~ input:", input);
   const [loading, setLoading] = useState(false);
   const [recipeOption, setRecipeOption] = useState([]);
+  console.log("🚀 ~ GenerateAiRecipe ~ recipeOption:", recipeOption);
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -23,7 +25,7 @@ export default function GenerateAiRecipe() {
     }
     try {
       const res = await generateRecipeVariants(input);
-      console.log("res", res);
+      setRecipeOption(res);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -48,16 +50,14 @@ export default function GenerateAiRecipe() {
       />
 
       {/* Button */}
-      {/* <TouchableOpacity style={styles.button} onPress={handleGenerate}>
-        <Text style={styles.buttonText}>Generate Recipe</Text>
-      </TouchableOpacity> */}
+
       <Button
         title="Generate Recipe"
         onPress={() => handleGenerate()}
         color="#8e2de2"
         loading={loading}
       />
-      {/* {recipeOption?.length  >0 && <RecipeOptionList recipeOption={recipeOption} />}  */}
+      {recipeOption && <RecipeOptionList recipeOption={recipeOption} />}
     </View>
   );
 }
