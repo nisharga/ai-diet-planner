@@ -1,9 +1,11 @@
+import { useRouter } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
 import Button from "../shared/Button";
 import { GRAY } from "../shared/Colors";
 
 export default function RecipeGenCard() {
+  const router = useRouter();
   return (
     <View
       style={{
@@ -31,7 +33,10 @@ export default function RecipeGenCard() {
         Let Our Al generate personalized recipes just for you!
       </Text>
 
-      <Button title={"Generate with AI"} onPress={() => console.log("hi")} />
+      <Button
+        title={"Generate with AI"}
+        onPress={() => router.push("/generate-ai-recipe")}
+      />
     </View>
   );
 }
