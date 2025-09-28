@@ -1,20 +1,21 @@
 import { UserContext } from "@/context/UserContent";
-import { generateFullRecipe, imageGeneration } from "@/services/ai";
+import { api } from "@/convex/_generated/api";
+import { generateFullRecipe } from "@/services/ai";
+import { useMutation } from "convex/react";
 import { useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import Loadingdialog from "../shared/Loadingdialog";
 
 export default function RecipeOptionList({ recipeOption }: any) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  //   const CreateRecipe = useMutation(api.Recipes.CreateRecipe);
-  const { user } = useContext(UserContext);
+  const CreateRecipe = useMutation(api.Recipes.CreateRecipe);
+  const [user] = useContext(UserContext);
   const router = useRouter();
 
   const onRecipeOptionSelect = async (recipe: any) => {
     console.log("🚀 ~ onRecipeOptionSelect ~ rr:", recipe);
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     setLoading(true);
     setError(null); // Clear any previous errors
 
@@ -23,52 +24,34 @@ export default function RecipeOptionList({ recipeOption }: any) {
         recipe?.recipeName,
         recipe?.description
       );
-      const image = await imageGeneration(recipe?.imagePrompt);
+
+      /* const image = await imageGeneration(recipe?.imagePrompt);
       console.log("🚀 ~ onRecipeOptionSelect ~ image:", image);
 
-      if (!result || !image || !result.choices || !result.choices[0]) {
+     if (!result || !image || !result.choices || !result.choices[0]) {
         throw new Error("Failed to generate recipe. Please try again.");
       }
+*/
+      // Save on DB
+      const saveRecipeResult = await CreateRecipe({
+        jsonData: JSON.stringify(recipe),
+        imageUrl: "image",
+        recipeName: recipe?.recipeName,
+        uid: user?._id,
+      });
+      console.log("saveRecipeResult", saveRecipeResult);
 
-      // Check if API returned an error
-
-      //   const extractJson = result.choices[0].message.content
-      //     .replace("```json", "")
-      //     .replace("```", "");
-      //   const parsedJSONResp = JSON.parse(extractJson);
-      //   console.log("Full Recipe", parsedJSONResp);
-      //   const aiImageResp = await GenerateRecipeImage(
-      //     parsedJSONResp?.imagePrompt
-      //   );
-      //   const saveRecipeResult = await CreateRecipe({
-      //     jsonData: parsedJSONResp,
-      //     imageUrl: aiImageResp?.data?.image,
-      //     recipeName: parsedJSONResp?.recipeName,
-      //     uid: user?._id,
-      //   });
-      //   router.push({
-      //     pathname: "/recipe-detail",
-      //     params: { recipeId: saveRecipeResult },
-      //   });
-      // } catch (error) {
-      //   console.error("Error creating recipe:", error);
-      //   // Set user-friendly error messages based on error type
-      //   let errorMessage =
-      //     "Something went wrong while generating your recipe. Please try again.";
-      //   if (error.message && error.message.includes("API")) {
-      //     errorMessage =
-      //       "Our recipe service is temporarily unavailable. Please try again in a few moments.";
-      //   } else if (error.message && error.message.includes("network")) {
-      //     errorMessage = "Please check your internet connection and try again.";
-      //   } else if (error.message && error.message.includes("quota")) {
-      //     errorMessage =
-      //       "We've reached our daily recipe generation limit. Please try again tomorrow.";
-      //   }
-      //   setError(errorMessage);
-      //   // Also show an alert
-      //   Alert.alert("Recipe Generation Failed", errorMessage, [
-      //     { text: "OK", onPress: () => setError(null) },
-      //   ]);
+      //  push db
+      router.push({
+        pathname: "/recipe-detail",
+        params: { recipe: JSON.stringify(saveRecipeResult) },
+      });
+    } catch (error) {
+      console.error("Error creating recipe:", error);
+      // Also show an alert
+      Alert.alert("Recipe Generation Failed", "Try Again", [
+        { text: "OK", onPress: () => setError(null) },
+      ]);
     } finally {
       setLoading(false);
     }
