@@ -1,10 +1,15 @@
 // api.ts
 import { OpenAI } from "openai";
- 
- 
+
+
+// base  
 const openai = new OpenAI({
   apiKey: process.env.EXPO_PUBLIC_AI_API_KEY, // use your key from .env
 });
+
+const BASE_URL = "https://aigurulab.tech";
+const apiKey = process.env.EXPO_PUBLIC_AI_GURU_LAB_API || '';
+
 
 // 1. calculateCaloriesAndProteins
 export const calculateCaloriesAndProteins = async (data: {
@@ -52,6 +57,7 @@ export const generateRecipeVariants = async (instruction: string) => {
       Return JSON format:
       [
         {
+          "imagePrompt": "string",
           "recipeName": "string",
           "description": "string",
           "ingredients": ["string"]
@@ -128,6 +134,42 @@ export const generateFullRecipe = async (recipeName: string, description: string
     return JSON.parse(response.choices[0].message.content || "{}");
   } catch (error) {
     console.error("Error generating full recipe:", error);
+    throw error;
+  }
+};
+
+// 4. Generate an image
+export const imageGeneration = async (
+  input: string,
+  width = 1024,
+  height = 1024,
+  model: "sdxl" | "flux" = "sdxl",
+  aspectRatio = "1:1"
+) => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/generate-image`, {
+      method: "POST",
+      headers: {
+        "x-api-key": apiKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        width,
+        height,
+        input,
+        model,
+        aspectRatio,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.image; // Base64 image string
+  } catch (error) {
+    console.error("Image generation failed:", error);
     throw error;
   }
 };

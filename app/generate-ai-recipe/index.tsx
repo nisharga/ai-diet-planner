@@ -13,10 +13,8 @@ import {
 
 export default function GenerateAiRecipe() {
   const [input, setInput] = useState("");
-  console.log("🚀 ~ GenerateAiRecipe ~ input:", input);
   const [loading, setLoading] = useState(false);
   const [recipeOption, setRecipeOption] = useState([]);
-  console.log("🚀 ~ GenerateAiRecipe ~ recipeOption:", recipeOption);
 
   const handleGenerate = async () => {
     setLoading(true);

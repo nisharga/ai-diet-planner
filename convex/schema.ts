@@ -16,12 +16,12 @@ export default defineSchema({
     calories: v.optional(v.number()),
     proteins: v.optional(v.number())
   }),
-//   recipes: defineTable({
-//     jsonData: v.any(),
-//     imageUrl : v.optional(v.string()),
-//     uid: v.id("users"),
-//     recipeName : v.string(),
-//   }),
+  recipes: defineTable({
+    jsonData: v.any(),
+    imageUrl : v.optional(v.string()),
+    uid: v.id("users"),
+    recipeName : v.string(),
+  }),
 //   mealPlan:defineTable({
 //     recipeId:v.id('recipes'),
 //     date:v.string(),

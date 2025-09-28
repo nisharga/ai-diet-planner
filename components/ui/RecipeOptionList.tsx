@@ -1,5 +1,5 @@
 import { UserContext } from "@/context/UserContent";
-import { generateFullRecipe } from "@/services/ai";
+import { generateFullRecipe, imageGeneration } from "@/services/ai";
 import { useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -13,6 +13,8 @@ export default function RecipeOptionList({ recipeOption }: any) {
   const router = useRouter();
 
   const onRecipeOptionSelect = async (recipe: any) => {
+    console.log("🚀 ~ onRecipeOptionSelect ~ rr:", recipe);
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     setLoading(true);
     setError(null); // Clear any previous errors
 
@@ -21,10 +23,13 @@ export default function RecipeOptionList({ recipeOption }: any) {
         recipe?.recipeName,
         recipe?.description
       );
-      if (!result || !result.choices || !result.choices[0]) {
+      const image = await imageGeneration(recipe?.imagePrompt);
+      console.log("🚀 ~ onRecipeOptionSelect ~ image:", image);
+
+      if (!result || !image || !result.choices || !result.choices[0]) {
         throw new Error("Failed to generate recipe. Please try again.");
       }
-      console.log("🚀 ~ onRecipeOptionSelect ~ result:", result);
+
       // Check if API returned an error
 
       //   const extractJson = result.choices[0].message.content
