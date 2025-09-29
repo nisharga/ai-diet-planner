@@ -15,7 +15,6 @@ export default function RecipeOptionList({ recipeOption }: any) {
   const router = useRouter();
 
   const onRecipeOptionSelect = async (recipe: any) => {
-    console.log("🚀 ~ onRecipeOptionSelect ~ rr:", recipe);
     setLoading(true);
     setError(null); // Clear any previous errors
 
@@ -25,27 +24,29 @@ export default function RecipeOptionList({ recipeOption }: any) {
         recipe?.description
       );
 
-      /* const image = await imageGeneration(recipe?.imagePrompt);
-      console.log("🚀 ~ onRecipeOptionSelect ~ image:", image);
+      // const image = await imageGeneration(recipe?.imagePrompt);
 
-     if (!result || !image || !result.choices || !result.choices[0]) {
+      /* if (!result) {
         throw new Error("Failed to generate recipe. Please try again.");
-      }
-*/
+      } */
+
       // Save on DB
       const saveRecipeResult = await CreateRecipe({
-        jsonData: JSON.stringify(recipe),
-        imageUrl: "image",
+        jsonData: JSON.stringify(result),
+        imageUrl:
+          "https://i.ibb.co.com/WNT80QX8/rotate-pyramid.pnghttps://i.ibb.co.com/3YYhyZRC/article-7866255-foods-you-should-eat-every-week-to-lose-weight-04-d58e9c481bce4a29b47295baade4072d.jpg",
         recipeName: recipe?.recipeName,
-        uid: user?._id,
+        uid: user?._id || "j5714s2fg9pe4d7ew89w23451d7rdf94",
       });
       console.log("saveRecipeResult", saveRecipeResult);
 
-      //  push db
-      router.push({
-        pathname: "/recipe-detail",
-        params: { recipe: JSON.stringify(saveRecipeResult) },
-      });
+      //  push to next screen
+      if (saveRecipeResult) {
+        router.push({
+          pathname: "/recipe-detail",
+          params: { recipe: JSON.stringify(saveRecipeResult) },
+        });
+      }
     } catch (error) {
       console.error("Error creating recipe:", error);
       // Also show an alert
