@@ -1,7 +1,8 @@
 import Button from "@/components/shared/Button";
+import AddToMealActionSheet from "@/components/ui/AddToMealActionSheet";
 import { useQuery } from "convex/react";
 import { useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Image,
   Platform,
@@ -10,10 +11,14 @@ import {
   Text,
   View,
 } from "react-native";
+import ActionSheet, { ActionSheetRef } from "react-native-actions-sheet";
 import { api } from "../../convex/_generated/api";
 
 export default function RecipeDetails() {
   const params = useLocalSearchParams();
+
+  // action sheet
+  const actionSheetRef = useRef<ActionSheetRef>(null);
 
   // Parse back from JSON
   const localSearchParams = params?.recipe
@@ -103,8 +108,15 @@ export default function RecipeDetails() {
 
       {/* add meal to plan */}
       <View style={{ marginBottom: 40 }}>
-        <Button title="Add Meal To Plan" onPress={() => console.log("hello")} />
+        <Button
+          title="Add Meal To Plan"
+          onPress={() => actionSheetRef.current?.show()}
+        />
       </View>
+
+      <ActionSheet ref={actionSheetRef}>
+        <AddToMealActionSheet recipeDetail={recipe} />
+      </ActionSheet>
     </ScrollView>
   );
 }

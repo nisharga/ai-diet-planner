@@ -109,10 +109,10 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const userId = userCredential.user;
-        console.log("🚀 ~ onSignIn ~ userId:", userId);
         const userData = await convex.query(api.User.GetUser, {
           email: email,
         });
+        console.log("🚀 ~ onSignIn ~ userId:", userId);
         setUser(userData);
         router.replace("/(tabs)/Home");
         if (user) {

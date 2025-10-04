@@ -55,7 +55,7 @@ const Preference = () => {
 
     console.log("result", result);
 
-    setUser((prev) => ({
+    setUser((prev: any) => ({
       ...prev,
       ...data,
     }));
