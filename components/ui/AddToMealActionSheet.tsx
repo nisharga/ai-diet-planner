@@ -1,18 +1,21 @@
+import { UserContext } from "@/context/UserContent";
+import { api } from "@/convex/_generated/api";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useMutation } from "convex/react";
+import { useContext, useState } from "react";
 import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
 import Button from "../shared/Button";
 import { GRAY, PRIMARY, WHITE, YELLOW } from "../shared/Colors";
+import DateSelection from "./DateSelection";
 
 export default function AddToMealActionSheet({
   recipeDetail,
   hideActionSheet,
 }: any) {
-  const [dateList, setDateList] = useState([]);
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedMeal, setSelectedMeal] = useState(null);
-  //   const CreateMealPlan = useMutation(api.MealPlan.CreateMealPlan);
-  //   const { user } = useContext(UserContext);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedMeal, setSelectedMeal] = useState("");
+  const CreateMealPlan = useMutation(api.MealPlan.CreateMealPlan);
+  const [user] = useContext(UserContext);
 
   const mealOptions = [
     { title: "Breakfast" },
@@ -25,15 +28,15 @@ export default function AddToMealActionSheet({
       alert("Please select both date and meal type.");
       return;
     }
-    /*  const result=await CreateMealPlan({
-      recipeId:recipeDetail?._id,
-      date:selectedDate,
-      mealType:selectedMeal,
-      userId: user?._id
+    const result = await CreateMealPlan({
+      recipeId: recipeDetail?._id,
+      date: selectedDate,
+      mealType: selectedMeal,
+      uid: user?._id,
     });
-    console.log("Meal Plan added:",result);
-    Alert.alert('Success', 'Recipe added to your meal plan!'); */
-    // hideActionSheet();
+    console.log("Meal Plan added:", result);
+    Alert.alert("Success", "Recipe added to your meal plan!");
+    hideActionSheet();
   };
 
   return (
@@ -49,7 +52,7 @@ export default function AddToMealActionSheet({
       </Text>
 
       {/* Select Date */}
-      {/* <DateSelection setSelectedDate={setSelectedDate} /> */}
+      <DateSelection setSelectedDate={setSelectedDate} />
 
       {/* Select Meal */}
       <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 20 }}>
@@ -61,7 +64,7 @@ export default function AddToMealActionSheet({
         keyExtractor={(item) => item.title}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => Alert.alert(item.title)}
+            onPress={() => setSelectedMeal(item.title)}
             style={{
               flex: 1,
               alignItems: "center",

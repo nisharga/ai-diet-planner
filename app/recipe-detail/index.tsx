@@ -115,7 +115,10 @@ export default function RecipeDetails() {
       </View>
 
       <ActionSheet ref={actionSheetRef}>
-        <AddToMealActionSheet recipeDetail={recipe} />
+        <AddToMealActionSheet
+          recipeDetail={recipe}
+          hideActionSheet={() => actionSheetRef.current?.hide()}
+        />
       </ActionSheet>
     </ScrollView>
   );
