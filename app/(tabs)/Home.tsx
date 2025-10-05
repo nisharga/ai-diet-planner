@@ -1,6 +1,7 @@
 import HomeHeader from "@/components/ui/HomeHeader";
 import RecipeGenCard from "@/components/ui/RecipeGenCard";
 import TodayProgress from "@/components/ui/TodayProgress";
+import TodaysMealPlan from "@/components/ui/TodaysMealPlan";
 import { UserContext } from "@/context/UserContent";
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect } from "react";
@@ -25,6 +26,8 @@ const Home = () => {
         <HomeHeader />
         <TodayProgress />
         <RecipeGenCard />
+
+        <TodaysMealPlan selectedDate="10/10/2025" />
       </View>
     </SafeAreaView>
   );

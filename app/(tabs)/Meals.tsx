@@ -1,11 +1,12 @@
+import TodaysMealPlan from "@/components/ui/TodaysMealPlan";
 import React from "react";
-import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Meals = () => {
   return (
-    <View>
-      <Text>Meals</Text>
-    </View>
+    <SafeAreaView>
+      <TodaysMealPlan selectedDate="10/10/2025" />
+    </SafeAreaView>
   );
 };
 
