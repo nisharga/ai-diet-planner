@@ -1,13 +1,41 @@
-import TodaysMealPlan from "@/components/ui/TodaysMealPlan";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import RecipeCard from "@/components/ui/RecipeCard";
+import RecipeGenCard from "@/components/ui/RecipeGenCard";
+import { useQuery } from "convex/react";
+import { FlatList, Text, View } from "react-native";
+import { api } from "../../convex/_generated/api";
 
-const Meals = () => {
+export default function Meals() {
+  const recipeList = useQuery(api.Recipes.GetAllRecipes);
+  console.log("All Recipes:", recipeList);
   return (
-    <SafeAreaView>
-      <TodaysMealPlan selectedDate="10/10/2025" />
-    </SafeAreaView>
+    <FlatList
+      data={[]}
+      renderItem={() => null}
+      ListHeaderComponent={
+        <View
+          style={{
+            padding: 20,
+            paddingTop: 50,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 25,
+              fontWeight: "bold",
+            }}
+          >
+            Discover Recipes
+          </Text>
+          <RecipeGenCard />
+          <View>
+            <FlatList
+              data={recipeList}
+              numColumns={2}
+              renderItem={({ item }) => <RecipeCard recipe={item} />}
+            />
+          </View>
+        </View>
+      }
+    />
   );
-};
-
-export default Meals;
+}
