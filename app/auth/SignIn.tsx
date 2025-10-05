@@ -193,7 +193,7 @@ const SignIn = () => {
           >
             Dont&apos;t have an account?{" "}
           </Text>
-          <Link href="/auth/SignUp" asChild>
+          {/* <Link href="/auth/SignUp" asChild>
             <Text
               style={{
                 textAlign: "center",
@@ -203,6 +203,18 @@ const SignIn = () => {
               }}
             >
               Create New Account
+            </Text>
+          </Link> */}
+          <Link href="/auth/SdkFiftyFour" asChild>
+            <Text
+              style={{
+                textAlign: "center",
+                marginTop: 5,
+                fontSize: 15,
+                fontWeight: "bold",
+              }}
+            >
+              Create SDK 54
             </Text>
           </Link>
         </View>
