@@ -5,7 +5,7 @@ import { FlatList, Text, View } from "react-native";
 import { api } from "../../convex/_generated/api";
 
 export default function Meals() {
-  const recipeList = useQuery(api.Recipes.GetAllRecipes);
+  const recipeList = useQuery(api.Recipes.GetAllRecipes, {});
   console.log("All Recipes:", recipeList);
   return (
     <FlatList

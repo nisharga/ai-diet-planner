@@ -4,11 +4,20 @@ import TodayProgress from "@/components/ui/TodayProgress";
 import TodaysMealPlan from "@/components/ui/TodaysMealPlan";
 import { UserContext } from "@/context/UserContent";
 import { useRouter } from "expo-router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
+  const [selectedDate, setSelectedDate] = useState("");
+  useEffect(() => {
+    const currentDate = new Date();
+    const formattedDate = currentDate
+      .toLocaleDateString("en-GB") // gives DD/MM/YYYY format
+      .replace(/\//g, "/"); // ensures slash separator
+    setSelectedDate(formattedDate);
+  }, []);
+
   const user = useContext(UserContext);
   const router = useRouter();
   useEffect(() => {
@@ -27,7 +36,7 @@ const Home = () => {
         <TodayProgress />
         <RecipeGenCard />
 
-        <TodaysMealPlan selectedDate="10/10/2025" />
+        <TodaysMealPlan selectedDate={selectedDate} />
       </View>
     </SafeAreaView>
   );

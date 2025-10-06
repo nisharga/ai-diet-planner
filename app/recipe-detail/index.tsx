@@ -34,8 +34,6 @@ export default function RecipeDetails() {
       ? JSON.parse(recipe.jsonData)
       : recipe?.jsonData;
 
-  console.log("recipe jsonData description:", jsonData);
-
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
