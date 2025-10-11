@@ -3,6 +3,7 @@
     "name": "ai-diet-planner",
     "slug": "ai-diet-planner",
     "version": "1.0.0",
+    "owner": "nisharga.sharetasking",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "aidietplanner",
@@ -52,7 +53,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "51748a8c-1eb4-4f35-b9e5-7076c5ec5456"
+        "projectId": "20c7b404-55ca-42fe-b91f-bf18cfe07e64"
       }
     }
   }

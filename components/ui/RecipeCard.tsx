@@ -1,6 +1,6 @@
 import { UserContext } from "@/context/UserContent";
 import { api } from "@/convex/_generated/api";
-import { generateFullRecipe } from "@/services/ai";
+import { generateFullRecipe, imageGeneration } from "@/services/ai";
 import { useMutation } from "convex/react";
 import { useRouter } from "expo-router";
 import { useContext } from "react";
@@ -20,12 +20,11 @@ export default function RecipeCard({ recipe }: any) {
         recipe?.description
       );
 
-      // const image = await imageGeneration(recipe?.imagePrompt);
+      const image = await imageGeneration(recipe?.imagePrompt);
 
       const saveRecipeResult = await CreateRecipe({
         jsonData: JSON.stringify(result),
-        imageUrl:
-          "https://i.ibb.co.com/WNT80QX8/rotate-pyramid.pnghttps://i.ibb.co.com/3YYhyZRC/article-7866255-foods-you-should-eat-every-week-to-lose-weight-04-d58e9c481bce4a29b47295baade4072d.jpg",
+        imageUrl: image,
         recipeName: recipe?.recipeName,
         uid: user?._id || "j5714s2fg9pe4d7ew89w23451d7rdf94",
       });
