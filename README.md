@@ -1,51 +1,117 @@
-# Welcome to your Expo app 👋
+# 🥗 AI Diet Planner
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**AI Diet Planner** is a smart nutrition tracking mobile app built with **React Native (Expo)** and powered by **AI**.  
+It helps users plan meals, track calories, and achieve their fitness goals with AI-generated recipes based on their personal data.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Features
 
-   ```bash
-   npm install
-   ```
+✅ **User Authentication** – Secure signup and login using email and password  
+✅ **Personalized Goals** – AI analyzes user height, weight, and target to calculate daily calorie needs  
+✅ **AI-Generated Recipes** – Instantly generate custom meal recipes using AI  
+✅ **Meal Planning** – Add meals to your daily plan and track progress  
+✅ **Calorie Tracking** – See how much you’ve eaten and how many calories remain to reach your goal  
+✅ **Beautiful UI** – Clean, modern design optimized for both Android and iOS  
+✅ **Profile Management** – Manage account, settings, and logout easily
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 📱 App Flow
 
-In the output, you'll find options to open the app in a
+1️⃣ **Splash Screen** – App entry point with branding  
+2️⃣ **Signup Screen** – User registers with name, email, and password  
+3️⃣ **Login Screen** – User logs in securely  
+4️⃣ **Goal Setup** – User enters height, weight, and target goal
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- AI calculates daily calorie requirements
+- Data stored in database for personalized tracking
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 🧭 Main Screens
 
-When you're ready, run:
+5️⃣ **🏠 Home Screen**
 
-```bash
-npm run reset-project
-```
+- Displays today’s calories and summary
+- Option to generate new food or check today’s meal
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+6️⃣ **🍽️ Meal Screen**
 
-## Learn more
+- Shows all AI-generated meals for the day
 
-To learn more about developing your project with Expo, look at the following resources:
+7️⃣ **📊 Progress Screen**
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- Visual summary of calories taken vs. remaining
+- Tracks how close the user is to their goal
 
-## Join the community
+8️⃣ **👤 Profile Screen**
 
-Join our community of developers creating universal apps.
+- User info, helpful links, and logout option
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# ai-diet-planner
+---
+
+## 🤖 How It Works
+
+9️⃣ **Create New Meal** → Redirects to recipe generation screen  
+🔟 **AI Recipe Screen** → User requests any type of recipe; AI generates detailed meal info  
+1️⃣1️⃣ **Loading Screen** → Displays while AI generates recipe  
+1️⃣2️⃣ **Recipe Details Screen** → Shows recipe info with ingredients & calories  
+1️⃣3️⃣ **Add to Meal Plan** → Opens a bottom sheet  
+1️⃣4️⃣ **Meal Time Selection** → User selects when they plan to eat it  
+1️⃣5️⃣ **Progress Tracking** → AI determines how many calories were consumed and updates daily goal progress
+
+---
+
+## 🖼️ App Screenshots
+
+|                                                    Splash                                                     |                                                    Signup                                                     |                                                    Login                                                     |                                                 Goal Setup                                                  |
+| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------: |
+| ![Splash](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/1.png) | ![Signup](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/2.png) | ![Login](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/3.png) | ![Goal](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/4.png) |
+
+|                                                    Home                                                     |                                                    Meals                                                     |                                                    Progress                                                     |                                                    Profile                                                     |
+| :---------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------: |
+| ![Home](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/5.png) | ![Meals](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/6.png) | ![Progress](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/7.png) | ![Profile](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/8.png) |
+
+|                                                    Create Meal                                                     |                                                Recipe Generation                                                 |                                                     Loading                                                     |                                                 Recipe Details                                                  |
+| :----------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
+| ![Create Meal](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/9.png) | ![Generate](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/10.png) | ![Loading](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/11.png) | ![Details](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/12.png) |
+
+|                                              Add to Meal Plan                                               |                                                  Meal Time                                                   |                                                     Progress Update                                                     |
+| :---------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------: |
+| ![Add](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/13.png) | ![Time](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/14.png) | ![Progress Update](https://raw.githubusercontent.com/nisharga/ai-diet-planner/refs/heads/main/assets/screenshot/15.png) |
+
+---
+
+## 🛠️ Tech Stack
+
+- **React Native (Expo)**
+- **TypeScript**
+- **Firebase Authentication**
+- **AI Recipe Generator (OpenAI / Custom API / AiguruLab for image)**
+- **Convex For Databse**
+- **Expo Router + Custom CSS**
+
+---
+
+## 🎯 Purpose
+
+This app demonstrates how **AI can help users plan meals intelligently** by analyzing their personal data and generating accurate calorie-based diet plans.  
+It’s a project that combines **AI + Health + Mobile UI** — perfect for portfolio or real-world health startup apps.
+
+---
+
+## 🧑‍💻 Developer
+
+**👋 Nisharga Kabir**  
+Frontend & Mobile App Developer (React Native | Next.js)  
+📧 Email: [kabirnishrga@gmail.com](mailto:kabirnishrga@gmail.com)  
+🌐 GitHub: [@nisharga](https://github.com/nisharga)
+
+---
+
+## ⭐ Show Your Support
+
+If you like this project, don’t forget to **⭐ star the repository** and share your feedback!
+
+---
